@@ -1,4 +1,4 @@
-Johanes - 16517074 - 13517072
+Johanes - 16517074 - 13517012
 
 Ini merupakan program kalkulator sederhana
 yang menerima input berupa operasi matematika dalam bahasa indonesia
