@@ -25,4 +25,4 @@ atau menggunakan cmd dengan command sebagai berikut:
 -program dapat dijalankan.
 
 Jika ada masalah dengan java dapat melihat troubleshoot dari Google.
-Atau contact via line di @johanesdoang
+Atau contact via line di @johanesdoang.
