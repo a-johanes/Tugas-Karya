@@ -18,29 +18,29 @@ public class TakeHomeCodingTest_Johanes {
 		System.out.println("ex: 'dua tambah dua' will return 'dua tambah dua adalah empat'");
 		System.out.println("    'dua kurang satu' will return 'dua kurang satu adalah satu'");
 		System.out.println("The program can takes any number between -999 until 999, just type 'negatif' for negative value.");
-		System.out.println("The program can takes four operator: plus ('tambah'), minus ('kurang'), times ('kali') and divide ('bagi').");
-		System.out.println("The program can't check the input, so please enter it correctly.");
+		System.out.println("The program can takes three operator: plus ('tambah'), minus ('kurang') and times ('kali').");
+		System.out.println("The program can't check and can't take wrong input, so please enter it correctly.");
 		System.out.println("The program will finish when you type in '-999'");
 		System.out.println("                                                                                        Created by: Johanes");
-		System.out.println();
+		System.out.println(); //comments
 		System.out.print("Input: ");
-		String equation = input.nextLine();
+		String equation = input.nextLine(); //inputing
 		while ( !(equation.equals("-999")) ) {
-			System.out.println("Output: " +equation + " adalah " +word(calculate(equation)) );
+			System.out.println("Output: " +equation + " adalah " +word(calculate(equation))); //doing calculation and output
 			System.out.println();
-			System.out.print("Input: ");
+			System.out.print("Input: "); //asking for input again
 			equation = input.nextLine();
 		}
 	}
-	public static int number(String number) {//makes words into number between 0-99
-		String[] temp = number.split(delims);
-		int output = 0;
-		boolean neg = false;
-		if ( temp[0].equals("negatif") ){
+	public static int number(String number) {//makes words into number between -999 until 999
+		String[] temp = number.split(delims); //splitting the input into array called "temp"
+		int output = 0; //output base
+		boolean neg = false; //flag for negative number
+		if ( temp[0].equals("negatif") ){ //if the input is a negatif
 			neg = true;
-			shiftArrayLeft(temp);
+			shiftArrayLeft(temp); //make the array move on cell left
 		}
-		if (temp.length == 1) { //only one word
+		if (temp.length == 1) { //only one word 
 			switch (temp[0]) {
 				case "nol" : 
 					output = 0;
@@ -93,42 +93,46 @@ public class TakeHomeCodingTest_Johanes {
 			}
 			output = number(first_part) + number(second_part);
 		}
-		if (neg) output *= -1;
+		if (neg) output *= -1; //if negatif is true than multiply it by -1
+		
 		return output;
 	}	
 	
-	public static int calculate(String input) {
-		String[] temp = input.split(delims);
+	public static int calculate(String input) { //doing the calculation by recognizing operator
+		String[] temp = input.split(delims); //splitting intput into "temp" array
 		int i = 0;
-		String[] operator = {"tambah","kurang","kali","bagi"};
+		String[] operator = {"tambah","kurang","kali"}; //list of the operator
 		String input_one = "";
 		String input_two = "";
-		while ( !(temp[i].equals(operator[0]) || temp[i].equals(operator[1]) || temp[i].equals(operator[2]) || temp[i].equals(operator[3]) ) ) {
-			input_one += temp[i]+ " ";
+		while ( !(temp[i].equals(operator[0]) || temp[i].equals(operator[1]) || temp[i].equals(operator[2]) ) ) { //finding the operator along the input
+			input_one += temp[i]+ " "; //making the first number
 			++i;
 		}
-		int ind_operator = i;
+		int ind_operator = i; //storing the operator index
 		++i;
+		
 		while (i < temp.length) {
-			input_two += temp[i]+ " ";
+			input_two += temp[i]+ " "; //making the seconf number
 			++i;
 		}
-		int output = 0;
-		if (temp[ind_operator].equals(operator[0])) {
-			output = number(input_one) + number(input_two);
-		} else if (temp[ind_operator].equals(operator[1])) {
-			output = number(input_one) - number(input_two);
-		} else if (temp[ind_operator].equals(operator[2])) {
-			output = number(input_one) * number(input_two);
-		} else if (temp[ind_operator].equals(operator[3])) {
-			if (number(input_two) == 0) output = 1000000;
-			else output = number(input_one) / number(input_two);
-		}
+		int output = 0; //output base number
+		int pertama = number(input_one); //first number as integer
+		int kedua = number(input_two); //second number as integer
+		
+		//operation
+		if (temp[ind_operator].equals(operator[0])) { // plus 
+			output = pertama  + kedua;
+		} else if (temp[ind_operator].equals(operator[1])) { // minus
+			output = pertama - kedua;
+		} else if (temp[ind_operator].equals(operator[2])) { // multiply
+			output = pertama * kedua;
+		} 
+		
 		return output;
 	}
 	
-	public static String word(int x) {
-		String output = "";
+	public static String word(int x) { //function for convert number as integer to string
+		String output = ""; //output base value
 		if (x < 0) { // x<0
 			output += "negatif ";
 		}
@@ -187,7 +191,7 @@ public class TakeHomeCodingTest_Johanes {
 				if (x%100 == 0) output += word(x/100) + " ratus";
 				else output += word(x/100) + " ratus " + word(x%100);
 			}
-		}else if (x < 1000000) { // 1000 <= x <= 999999
+		} else if (x < 1000000) { // 1000 <= x <= 999999
 			if ( x < 2000) {
 				output += "seribu";
 				if (x != 1000) output += " " + word(x%1000);
@@ -195,11 +199,11 @@ public class TakeHomeCodingTest_Johanes {
 				if (x%1000 == 0) output += word(x/1000) + " ribu"; 
 				else output += word(x/1000) + " ribu " + word(x%1000);
 			}
-		} else output += "undefined";
+		}
 		return output;
 	}
 	
-	public static void shiftArrayLeft(String[] input){
+	public static void shiftArrayLeft(String[] input){ //shifting array one cell left
 		for ( int i = 1; i < input.length; i++ ) {
 			input[i-1] = input[i];
 		}
